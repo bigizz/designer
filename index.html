@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campaign Engine - Main Dashboard</title>
+    <title>Campaign Engine</title>
     <link rel="stylesheet" href="xp.css">
 </head>
 <body>
 
 <div class="xp-desktop">
-    <!-- Sidebar Window -->
     <div class="xp-window sidebar-window">
         <div class="xp-titlebar">
             <span class="window-icon"></span>
@@ -17,7 +16,7 @@
         </div>
         <div class="sidebar-body">
             <div class="sidebar-section">
-                <div class="sidebar-section-title">Workflow Phases</div>
+                <div class="sidebar-section-title">Phases</div>
                 <ul>
                     <li><a href="index.html" class="active-link"><span class="nav-dot green"></span> Main Engine</a></li>
                     <li><a href="strategist.html"><span class="nav-dot blue"></span> Phase 1: Strategist</a></li>
@@ -26,7 +25,7 @@
                 </ul>
             </div>
             <div class="sidebar-section">
-                <div class="sidebar-section-title">Output Files</div>
+                <div class="sidebar-section-title">Output</div>
                 <ul>
                     <li><a href="#"><span class="nav-dot"></span> benchmark_report.md</a></li>
                     <li><a href="#"><span class="nav-dot"></span> visual_direction.md</a></li>
@@ -36,11 +35,10 @@
         </div>
     </div>
 
-    <!-- Main Window -->
     <div class="xp-window main-window">
         <div class="xp-titlebar">
             <span class="window-icon"></span>
-            <span class="window-title">Campaign Engine — Main Dashboard</span>
+            <span class="window-title">Campaign Engine</span>
             <div class="window-controls">
                 <button class="btn-minimize">—</button>
                 <button class="btn-maximize">☐</button>
@@ -54,19 +52,17 @@
 
         <div class="xp-body">
             <h1 class="content-heading">Campaign Creation Engine</h1>
-            <p class="content-subtitle">Orchestrate the full Strategist → Creative Director → Designer pipeline.</p>
+            <p class="content-subtitle">Strategist → Creative Director → Designer</p>
             <hr class="xp-separator">
 
-            <!-- Input Section -->
             <div class="form-group">
                 <label for="campaign-input">Brief URL or Description</label>
-                <div style="display:flex;gap:8px;">
-                    <input type="text" id="campaign-input" class="xp-input" placeholder="e.g. https://brand-website.com or paste a brief..." style="flex:1;">
-                    <button type="button" id="start-btn" class="xp-btn xp-btn-primary">▶ Run Engine</button>
+                <div style="display:flex;gap:6px;">
+                    <input type="text" id="campaign-input" class="xp-input" placeholder="https://brand-website.com or paste a brief..." style="flex:1;">
+                    <button type="button" id="start-btn" class="xp-btn xp-btn-primary">▶ Run</button>
                 </div>
             </div>
 
-            <!-- Pipeline Visualization -->
             <div class="pipeline-container">
                 <div class="pipeline-phase" id="phase-1">
                     <div class="phase-num">Phase 1</div>
@@ -87,65 +83,39 @@
                 </div>
             </div>
 
-            <!-- Results Section -->
             <div id="results-panel" style="display:none;">
                 <hr class="xp-separator">
-                <h2 style="font-size:16px;font-weight:700;margin-bottom:12px;color:#fff;">Output Preview</h2>
                 <div class="xp-tabs">
-                    <button class="xp-tab active" data-target="tab-report">Benchmark Report</button>
-                    <button class="xp-tab" data-target="tab-visuals">Visual Direction</button>
+                    <button class="xp-tab active" data-target="tab-report">Report</button>
+                    <button class="xp-tab" data-target="tab-visuals">Visuals</button>
                     <button class="xp-tab" data-target="tab-media">Media Kit</button>
                 </div>
                 <div class="xp-tab-pane active" id="tab-report">
-                    <div class="xp-infobox">The Strategist has completed the benchmark report. See <code>results/benchmark_report.md</code> for the full output.</div>
-                    <div id="report-content" style="color:var(--xp-text-muted);font-size:13px;line-height:1.6;">
-                        <p><strong>Audit:</strong> Analysis of brand state will appear here.</p>
-                        <p><strong>Positioning:</strong> Strategic pillar and market stance.</p>
-                        <p><strong>Gaps:</strong> Identified opportunities.</p>
-                        <p><strong>Persona:</strong> Target audience profile.</p>
-                    </div>
+                    <div class="xp-successbox">Benchmark report generated → <code>results/benchmark_report.md</code></div>
                 </div>
                 <div class="xp-tab-pane" id="tab-visuals">
-                    <div class="xp-infobox">The Creative Director has established the visual direction. See <code>results/visual_direction.md</code>.</div>
-                    <p style="color:var(--xp-text-muted);font-size:13px;">Moodboards, color palettes, and typography guidelines will render here.</p>
+                    <div class="xp-successbox">Visual direction established → <code>results/visual_direction.md</code></div>
                 </div>
                 <div class="xp-tab-pane" id="tab-media">
-                    <div class="xp-infobox">The Designer has generated the final assets. See <code>results/media_kit.md</code>.</div>
-                    <p style="color:var(--xp-text-muted);font-size:13px;">Generated images and media kit details will render here.</p>
+                    <div class="xp-successbox">Media kit compiled → <code>results/media_kit.md</code></div>
                 </div>
             </div>
         </div>
 
         <div class="xp-statusbar">
-            <div class="statusbar-section"><span class="status-led"></span> Server Online</div>
-            <div class="statusbar-section">localhost:8080</div>
-            <div class="statusbar-section" style="margin-left:auto;" id="clock-display"></div>
+            <div class="statusbar-section"><span class="status-led"></span> Ready</div>
         </div>
     </div>
 </div>
 
-<!-- Taskbar -->
 <div class="xp-taskbar">
-    <button class="xp-start-btn"><span class="start-icon"></span> Start</button>
     <div class="taskbar-items">
-        <div class="taskbar-item active">📊 Campaign Engine</div>
+        <div class="taskbar-item active">Campaign Engine</div>
     </div>
-    <div class="taskbar-clock" id="taskbar-clock"></div>
 </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // Clock
-    function updateClock() {
-        const now = new Date();
-        const t = now.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
-        document.getElementById('taskbar-clock').textContent = t;
-        const cd = document.getElementById('clock-display');
-        if(cd) cd.textContent = now.toLocaleDateString() + ' ' + t;
-    }
-    updateClock(); setInterval(updateClock, 30000);
-
-    // Tabs
     document.querySelectorAll('.xp-tab').forEach(btn => {
         btn.addEventListener('click', () => {
             document.querySelectorAll('.xp-tab').forEach(b => b.classList.remove('active'));
@@ -155,7 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Engine
     const startBtn = document.getElementById('start-btn');
     const input = document.getElementById('campaign-input');
 
@@ -166,8 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const delay = ms => new Promise(r => setTimeout(r, ms));
         const setPhase = (id, state, text) => {
-            const el = document.getElementById(id);
-            el.className = 'pipeline-phase ' + state;
+            document.getElementById(id).className = 'pipeline-phase ' + state;
             document.getElementById('status-' + id.split('-')[1]).textContent = text;
         };
 
@@ -178,22 +146,22 @@ document.addEventListener('DOMContentLoaded', () => {
         await delay(2000);
         setPhase('phase-1', 'completed', '✓ Done');
         document.getElementById('arrow-1').classList.add('lit');
-        await delay(800);
+        await delay(600);
 
         setPhase('phase-2', 'active', 'Designing...');
-        await delay(2500);
+        await delay(2000);
         setPhase('phase-2', 'completed', '✓ Done');
         document.getElementById('arrow-2').classList.add('lit');
-        await delay(800);
+        await delay(600);
 
         setPhase('phase-3', 'active', 'Generating...');
-        await delay(3000);
+        await delay(2500);
         setPhase('phase-3', 'completed', '✓ Done');
-        await delay(500);
+        await delay(400);
 
         document.getElementById('results-panel').style.display = 'block';
         startBtn.disabled = false;
-        startBtn.textContent = '▶ Run Again';
+        startBtn.textContent = '▶ Run';
     });
 });
 </script>

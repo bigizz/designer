@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phase 1: Strategist — Campaign Engine</title>
+    <title>Phase 1: Strategist</title>
     <link rel="stylesheet" href="xp.css">
 </head>
 <body>
 
 <div class="xp-desktop">
-    <!-- Sidebar -->
     <div class="xp-window sidebar-window">
         <div class="xp-titlebar">
             <span class="window-icon"></span>
@@ -17,7 +16,7 @@
         </div>
         <div class="sidebar-body">
             <div class="sidebar-section">
-                <div class="sidebar-section-title">Workflow Phases</div>
+                <div class="sidebar-section-title">Phases</div>
                 <ul>
                     <li><a href="index.html"><span class="nav-dot green"></span> Main Engine</a></li>
                     <li><a href="strategist.html" class="active-link"><span class="nav-dot blue"></span> Phase 1: Strategist</a></li>
@@ -28,17 +27,16 @@
             <div class="sidebar-section">
                 <div class="sidebar-section-title">Output</div>
                 <ul>
-                    <li><a href="#"><span class="nav-dot blue"></span> benchmark_report.md</a></li>
+                    <li><a href="#"><span class="nav-dot"></span> benchmark_report.md</a></li>
                 </ul>
             </div>
         </div>
     </div>
 
-    <!-- Main Window -->
     <div class="xp-window main-window">
         <div class="xp-titlebar">
             <span class="window-icon"></span>
-            <span class="window-title">Phase 1: Strategist — Input Portal</span>
+            <span class="window-title">Phase 1: Strategist</span>
             <div class="window-controls">
                 <button class="btn-minimize">—</button>
                 <button class="btn-maximize">☐</button>
@@ -51,82 +49,65 @@
         </div>
 
         <div class="xp-body">
-            <h1 class="content-heading">Strategist Input Portal</h1>
-            <p class="content-subtitle">Provide the client brief. The Strategist agent will analyze it to create a benchmark report.</p>
+            <h1 class="content-heading">Strategist Input</h1>
+            <p class="content-subtitle">Provide the client brief. Output → results/benchmark_report.md</p>
             <hr class="xp-separator">
 
             <form id="strategist-form">
                 <div class="form-group">
-                    <label for="brief-text">Client Brief Text</label>
-                    <textarea id="brief-text" class="xp-textarea" rows="8" placeholder="Type or paste the campaign goals, target audience, and strategic requirements here..."></textarea>
+                    <label for="brief-text">Client Brief</label>
+                    <textarea id="brief-text" class="xp-textarea" rows="8" placeholder="Campaign goals, target audience, requirements..."></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="brief-file">Supporting Documents</label>
+                    <label for="brief-file">Attachments</label>
                     <div class="xp-file-input" id="file-drop-zone">
                         <input type="file" id="brief-file" accept=".pdf,.txt,.ppt,.pptx,.docx" style="display:none;">
-                        <p>📁 Click to upload or drag & drop</p>
-                        <p style="font-size:11px;margin-top:4px;">.pdf, .txt, .ppt, .pptx, .docx</p>
-                        <p id="file-name" style="color:var(--xp-accent);margin-top:6px;font-size:12px;"></p>
+                        <p>Click to upload — .pdf .txt .ppt .docx</p>
+                        <p id="file-name" style="color:var(--text);margin-top:4px;font-size:11px;"></p>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="brief-urls">Reference URLs (one per line)</label>
-                    <textarea id="brief-urls" class="xp-textarea" rows="4" placeholder="https://example.com/brand-guidelines&#10;https://competitor.com"></textarea>
+                    <label for="brief-urls">Reference URLs</label>
+                    <textarea id="brief-urls" class="xp-textarea" rows="3" placeholder="https://example.com/brand-guidelines"></textarea>
                 </div>
 
-                <div style="display:flex;gap:8px;align-items:center;margin-top:20px;">
+                <div style="display:flex;gap:6px;margin-top:16px;">
                     <button type="submit" id="submit-btn" class="xp-btn xp-btn-primary">▶ Run Strategist</button>
                     <button type="button" id="cancel-btn" class="xp-btn">Cancel</button>
                 </div>
             </form>
 
-            <div id="output-message" class="xp-successbox" style="display:none;margin-top:20px;">
-                <strong>✓ Success!</strong> Inputs recorded. The Strategist Agent is now analyzing the brief to generate <code>results/benchmark_report.md</code>.
+            <div id="output-message" class="xp-successbox" style="display:none;margin-top:16px;">
+                <strong>✓</strong> Inputs recorded. Generating <code>results/benchmark_report.md</code>.
             </div>
         </div>
 
         <div class="xp-statusbar">
             <div class="statusbar-section"><span class="status-led"></span> Ready</div>
             <div class="statusbar-section">Phase 1 of 3</div>
-            <div class="statusbar-section" style="margin-left:auto;" id="clock-display"></div>
         </div>
     </div>
 </div>
 
 <div class="xp-taskbar">
-    <button class="xp-start-btn"><span class="start-icon"></span> Start</button>
     <div class="taskbar-items">
-        <div class="taskbar-item">📊 Main Engine</div>
-        <div class="taskbar-item active">🔍 Strategist</div>
+        <div class="taskbar-item">Main Engine</div>
+        <div class="taskbar-item active">Strategist</div>
     </div>
-    <div class="taskbar-clock" id="taskbar-clock"></div>
 </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // Clock
-    function updateClock() {
-        const now = new Date();
-        const t = now.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
-        document.getElementById('taskbar-clock').textContent = t;
-        const cd = document.getElementById('clock-display');
-        if(cd) cd.textContent = now.toLocaleDateString() + ' ' + t;
-    }
-    updateClock(); setInterval(updateClock, 30000);
-
-    // File upload
     const dropZone = document.getElementById('file-drop-zone');
     const fileInput = document.getElementById('brief-file');
     const fileName = document.getElementById('file-name');
-
     dropZone.addEventListener('click', () => fileInput.click());
     fileInput.addEventListener('change', () => {
         if(fileInput.files[0]) fileName.textContent = '📎 ' + fileInput.files[0].name;
     });
 
-    // Form
     const form = document.getElementById('strategist-form');
     const outputMsg = document.getElementById('output-message');
     const submitBtn = document.getElementById('submit-btn');
@@ -136,7 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
         outputMsg.style.display = 'block';
         submitBtn.textContent = '⏳ Processing...';
         submitBtn.disabled = true;
-
         console.log("Strategist Inputs:", {
             text: document.getElementById('brief-text').value,
             file: fileInput.files[0] ? fileInput.files[0].name : "None",
