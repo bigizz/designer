@@ -1,0 +1,594 @@
+/* ===== Windows XP Dark Mode Design System ===== */
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --xp-bg: #1a1a2e;
+  --xp-panel: #16213e;
+  --xp-titlebar: linear-gradient(180deg, #3a7bd5 0%, #1e50a0 45%, #1a3f7a 55%, #2a5db0 100%);
+  --xp-titlebar-inactive: linear-gradient(180deg, #7b96b2 0%, #607d94 100%);
+  --xp-border-light: #5a8ec9;
+  --xp-border-dark: #0a1628;
+  --xp-btn-face: #2a2a4a;
+  --xp-btn-highlight: #4a4a6a;
+  --xp-btn-shadow: #0a0a1e;
+  --xp-input-bg: #0f0f23;
+  --xp-text: #e8e8f0;
+  --xp-text-muted: #8888aa;
+  --xp-accent: #3a7bd5;
+  --xp-green: #44b855;
+  --xp-yellow: #f0c040;
+  --xp-red: #e04040;
+  --xp-start-green: #3c9a3c;
+  --xp-start-hover: #4db84d;
+  --xp-link: #6eb5ff;
+  --xp-sidebar: #0d1a30;
+  --xp-taskbar: #0c1929;
+  --font-system: 'Inter', 'Tahoma', 'Segoe UI', sans-serif;
+  --font-pixel: 'Pixelify Sans', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font-system);
+  font-size: 14px;
+  background: var(--xp-bg);
+  color: var(--xp-text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a { color: var(--xp-link); text-decoration: none; }
+a:hover { text-decoration: underline; color: #90ccff; }
+
+/* ===== Desktop Background ===== */
+.xp-desktop {
+  flex: 1;
+  background: linear-gradient(135deg, #0a0e27 0%, #1a1a3e 30%, #0d1a30 70%, #0a1628 100%);
+  padding: 12px;
+  display: flex;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.xp-desktop::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 30% 20%, rgba(58,123,213,0.08) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 80%, rgba(68,184,85,0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* ===== Taskbar ===== */
+.xp-taskbar {
+  height: 40px;
+  background: linear-gradient(180deg, #1a2a4a 0%, #0c1929 40%, #0a1525 100%);
+  border-top: 1px solid #3a5a8a;
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+  gap: 4px;
+  z-index: 100;
+}
+
+.xp-start-btn {
+  background: linear-gradient(180deg, #4db84d 0%, #3c9a3c 50%, #2d7a2d 100%);
+  border: 1px solid #2a6a2a;
+  border-radius: 0 8px 8px 0;
+  color: white;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 4px 16px 4px 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  letter-spacing: 0.5px;
+  transition: filter 0.15s;
+}
+
+.xp-start-btn:hover { filter: brightness(1.15); }
+
+.xp-start-btn .start-icon {
+  width: 20px; height: 20px;
+  background: radial-gradient(circle, #ff6040 25%, #ff4020 50%, #cc2000 100%);
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.3);
+  box-shadow: 0 0 6px rgba(255,80,40,0.5);
+}
+
+.taskbar-items {
+  display: flex;
+  gap: 3px;
+  flex: 1;
+  margin-left: 8px;
+}
+
+.taskbar-item {
+  background: linear-gradient(180deg, #2a3a5a 0%, #1a2a4a 100%);
+  border: 1px solid #3a5a8a;
+  border-radius: 3px;
+  color: var(--xp-text);
+  font-size: 12px;
+  padding: 3px 12px;
+  cursor: pointer;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.15s;
+}
+
+.taskbar-item.active {
+  background: linear-gradient(180deg, #1a2a4a 0%, #0f1a30 100%);
+  border-color: #5a8ec9;
+  box-shadow: inset 0 0 8px rgba(58,123,213,0.2);
+}
+
+.taskbar-clock {
+  margin-left: auto;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid #2a3a5a;
+  border-left: 1px solid #1a2a3a;
+  padding: 2px 12px;
+  font-size: 12px;
+  color: var(--xp-text-muted);
+  height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+/* ===== XP Window ===== */
+.xp-window {
+  background: var(--xp-panel);
+  border: 1px solid var(--xp-border-light);
+  border-radius: 8px 8px 0 0;
+  box-shadow: 2px 4px 20px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.05);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: windowOpen 0.3s ease-out;
+}
+
+@keyframes windowOpen {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.xp-window.main-window { flex: 1; }
+.xp-window.sidebar-window { width: 200px; min-width: 200px; }
+
+.xp-titlebar {
+  background: var(--xp-titlebar);
+  padding: 4px 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 30px;
+  border-radius: 8px 8px 0 0;
+  user-select: none;
+}
+
+.xp-titlebar .window-icon {
+  width: 16px; height: 16px;
+  background: radial-gradient(circle, var(--xp-accent) 40%, transparent 70%);
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.xp-titlebar .window-title {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.window-controls {
+  display: flex;
+  gap: 2px;
+}
+
+.window-controls button {
+  width: 22px; height: 22px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.4);
+  transition: filter 0.1s;
+}
+
+.window-controls button:hover { filter: brightness(1.3); }
+.btn-minimize { background: linear-gradient(180deg, #4a7ab5 0%, #3a6090 100%); }
+.btn-maximize { background: linear-gradient(180deg, #4a7ab5 0%, #3a6090 100%); }
+.btn-close { background: linear-gradient(180deg, #c04040 0%, #a02020 100%); }
+
+/* ===== Window Toolbar (Address Bar) ===== */
+.xp-toolbar {
+  background: linear-gradient(180deg, #1a2a45 0%, #152035 100%);
+  border-bottom: 1px solid #2a3a55;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.xp-toolbar .toolbar-label {
+  color: var(--xp-text-muted);
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+.xp-toolbar .toolbar-path {
+  flex: 1;
+  background: var(--xp-input-bg);
+  border: 1px solid #2a3a55;
+  border-radius: 2px;
+  padding: 3px 8px;
+  color: var(--xp-text);
+  font-size: 12px;
+  font-family: var(--font-system);
+}
+
+/* ===== Window Body ===== */
+.xp-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px;
+  background: var(--xp-panel);
+}
+
+/* ===== Sidebar Navigation ===== */
+.sidebar-body {
+  padding: 0;
+  background: var(--xp-sidebar);
+  flex: 1;
+  overflow-y: auto;
+}
+
+.sidebar-section {
+  border-bottom: 1px solid #1a2a45;
+}
+
+.sidebar-section-title {
+  background: linear-gradient(180deg, #1a2a4a 0%, #152040 100%);
+  padding: 8px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--xp-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  cursor: default;
+}
+
+.sidebar-section ul { list-style: none; }
+
+.sidebar-section li a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px 7px 16px;
+  font-size: 12px;
+  color: var(--xp-text);
+  transition: background 0.15s;
+  border-left: 3px solid transparent;
+}
+
+.sidebar-section li a:hover {
+  background: rgba(58,123,213,0.1);
+  text-decoration: none;
+  border-left-color: var(--xp-accent);
+}
+
+.sidebar-section li a.active-link {
+  background: rgba(58,123,213,0.15);
+  border-left-color: var(--xp-accent);
+  color: #90ccff;
+}
+
+.nav-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--xp-text-muted);
+  flex-shrink: 0;
+}
+
+.nav-dot.green { background: var(--xp-green); box-shadow: 0 0 4px rgba(68,184,85,0.5); }
+.nav-dot.blue { background: var(--xp-accent); box-shadow: 0 0 4px rgba(58,123,213,0.5); }
+.nav-dot.yellow { background: var(--xp-yellow); box-shadow: 0 0 4px rgba(240,192,64,0.5); }
+.nav-dot.red { background: var(--xp-red); box-shadow: 0 0 4px rgba(224,64,64,0.5); }
+
+/* ===== XP Buttons ===== */
+.xp-btn {
+  background: linear-gradient(180deg, #3a3a5a 0%, #2a2a4a 40%, #252545 60%, #2a2a4a 100%);
+  border: 1px solid #5a5a7a;
+  border-radius: 3px;
+  color: var(--xp-text);
+  padding: 6px 20px;
+  font-size: 13px;
+  font-family: var(--font-system);
+  cursor: pointer;
+  transition: all 0.15s;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+.xp-btn:hover {
+  background: linear-gradient(180deg, #4a4a6a 0%, #3a3a5a 100%);
+  border-color: #7a7a9a;
+}
+
+.xp-btn:active {
+  background: linear-gradient(180deg, #252545 0%, #3a3a5a 100%);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.xp-btn-primary {
+  background: linear-gradient(180deg, #4a8ae0 0%, #3a7bd5 40%, #2a60b0 100%);
+  border-color: #2a5090;
+  color: white;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.xp-btn-primary:hover {
+  background: linear-gradient(180deg, #5a9af0 0%, #4a8ae0 100%);
+  border-color: #3a60a0;
+}
+
+.xp-btn-success {
+  background: linear-gradient(180deg, #4db84d 0%, #3ca03c 50%, #2d802d 100%);
+  border-color: #2a6a2a;
+  color: white;
+  font-weight: 600;
+}
+
+/* ===== Form Elements ===== */
+.xp-input, .xp-textarea, .xp-select {
+  background: var(--xp-input-bg);
+  border: 1px solid #2a3a55;
+  border-radius: 2px;
+  color: var(--xp-text);
+  padding: 8px 10px;
+  font-family: var(--font-system);
+  font-size: 13px;
+  width: 100%;
+  transition: border-color 0.2s;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.xp-input:focus, .xp-textarea:focus {
+  outline: none;
+  border-color: var(--xp-accent);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.3), 0 0 0 1px rgba(58,123,213,0.3);
+}
+
+.xp-textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
+
+.xp-file-input {
+  background: var(--xp-input-bg);
+  border: 1px dashed #3a4a65;
+  border-radius: 4px;
+  padding: 16px;
+  text-align: center;
+  color: var(--xp-text-muted);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.xp-file-input:hover {
+  border-color: var(--xp-accent);
+  background: rgba(58,123,213,0.05);
+}
+
+.form-group { margin-bottom: 16px; }
+
+.form-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--xp-text-muted);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ===== Content Styles ===== */
+.content-heading {
+  font-family: var(--font-system);
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: #fff;
+}
+
+.content-subtitle {
+  font-size: 13px;
+  color: var(--xp-text-muted);
+  margin-bottom: 20px;
+}
+
+.xp-separator {
+  border: none;
+  border-top: 1px solid #2a3a55;
+  margin: 16px 0;
+}
+
+/* ===== Phase Pipeline ===== */
+.pipeline-container {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: 20px 0;
+  padding: 16px;
+  background: rgba(0,0,0,0.2);
+  border: 1px solid #1a2a45;
+  border-radius: 4px;
+}
+
+.pipeline-phase {
+  flex: 1;
+  text-align: center;
+  padding: 12px 8px;
+  border: 1px solid #2a3a55;
+  background: rgba(20,30,50,0.5);
+  border-radius: 4px;
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+.pipeline-phase .phase-num {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--xp-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.pipeline-phase .phase-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--xp-text);
+}
+
+.pipeline-phase .phase-status {
+  font-size: 11px;
+  color: var(--xp-text-muted);
+  margin-top: 6px;
+}
+
+.pipeline-phase.active {
+  border-color: var(--xp-yellow);
+  background: rgba(240,192,64,0.08);
+  box-shadow: 0 0 12px rgba(240,192,64,0.1);
+}
+
+.pipeline-phase.active .phase-status { color: var(--xp-yellow); }
+.pipeline-phase.active .phase-num { color: var(--xp-yellow); }
+
+.pipeline-phase.completed {
+  border-color: var(--xp-green);
+  background: rgba(68,184,85,0.08);
+}
+
+.pipeline-phase.completed .phase-status { color: var(--xp-green); }
+.pipeline-phase.completed .phase-num { color: var(--xp-green); }
+
+.pipeline-arrow {
+  width: 30px;
+  text-align: center;
+  color: #3a4a65;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.pipeline-arrow.lit { color: var(--xp-green); }
+
+/* ===== Status Bar ===== */
+.xp-statusbar {
+  background: linear-gradient(180deg, #1a2a45 0%, #152035 100%);
+  border-top: 1px solid #2a3a55;
+  padding: 3px 10px;
+  font-size: 11px;
+  color: var(--xp-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.statusbar-section {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.status-led {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--xp-green);
+  box-shadow: 0 0 4px rgba(68,184,85,0.6);
+}
+
+/* ===== Success / Info Boxes ===== */
+.xp-infobox {
+  background: rgba(58,123,213,0.08);
+  border: 1px solid rgba(58,123,213,0.3);
+  border-left: 4px solid var(--xp-accent);
+  padding: 12px 16px;
+  border-radius: 0 4px 4px 0;
+  margin: 12px 0;
+  font-size: 13px;
+}
+
+.xp-successbox {
+  background: rgba(68,184,85,0.08);
+  border: 1px solid rgba(68,184,85,0.3);
+  border-left: 4px solid var(--xp-green);
+  padding: 12px 16px;
+  border-radius: 0 4px 4px 0;
+  margin: 12px 0;
+  font-size: 13px;
+}
+
+/* ===== Tabs ===== */
+.xp-tabs {
+  display: flex;
+  gap: 2px;
+  border-bottom: 1px solid #2a3a55;
+  margin-bottom: 16px;
+}
+
+.xp-tab {
+  background: linear-gradient(180deg, #1a2a45 0%, #152035 100%);
+  border: 1px solid #2a3a55;
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--xp-text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.xp-tab:hover { background: linear-gradient(180deg, #2a3a55 0%, #1a2a45 100%); color: var(--xp-text); }
+
+.xp-tab.active {
+  background: var(--xp-panel);
+  color: #fff;
+  border-color: #3a5a8a;
+  position: relative;
+  top: 1px;
+}
+
+.xp-tab-pane { display: none; }
+.xp-tab-pane.active { display: block; animation: fadeIn 0.3s ease; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ===== Responsive ===== */
+@media (max-width: 800px) {
+  .xp-desktop { flex-direction: column; }
+  .xp-window.sidebar-window { width: 100%; min-width: 100%; }
+  .pipeline-container { flex-direction: column; }
+  .pipeline-arrow { transform: rotate(90deg); }
+}

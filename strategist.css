@@ -1,0 +1,213 @@
+/* Minimal Wikipedia-like Design (Dark Mode) */
+body {
+    font-family: sans-serif;
+    font-size: 14px;
+    background-color: #000000;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #8ab4f8;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Sidebar structure */
+#mw-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10em;
+    padding-top: 1em;
+}
+
+.portal {
+    margin: 0 0.6em 0 0.7em;
+    padding: 0.25em 0;
+}
+
+.portal h3 {
+    font-size: 0.75em;
+    color: #aaaaaa;
+    font-weight: normal;
+    margin: 0.5em 0 0 0.66em;
+    padding: 0.25em 0;
+    cursor: default;
+    border-bottom: 1px solid #444444;
+}
+
+.portal .body {
+    margin: 0 0 0 1.25em;
+    padding-top: 0;
+}
+
+.portal .body ul {
+    list-style-type: none;
+    list-style-image: none;
+    margin: 0;
+    padding: 0;
+}
+
+.portal .body ul li {
+    margin: 0;
+    padding: 0.25em 0;
+    font-size: 0.75em;
+}
+
+/* Main Content Area */
+#content {
+    margin-left: 11em;
+    padding: 1.25em 1.5em 1.5em 1.5em;
+    background-color: #111111;
+    border: 1px solid #333333;
+    border-right-width: 0;
+    margin-top: -1px;
+    min-height: 100vh;
+}
+
+h1.firstHeading {
+    font-family: "Linux Libertine", "Georgia", "Times", serif;
+    line-height: 1.3;
+    margin-bottom: 0.25em;
+    padding: 0;
+    border-bottom: 1px solid #444444;
+    font-size: 1.8em;
+    font-weight: normal;
+}
+
+#siteSub {
+    font-size: 84%;
+    color: #aaaaaa;
+}
+
+h2 {
+    font-family: "Linux Libertine", "Georgia", "Times", serif;
+    line-height: 1.3;
+    margin-bottom: 0.25em;
+    padding: 0;
+    border-bottom: 1px solid #444444;
+    font-size: 1.5em;
+    font-weight: normal;
+    margin-top: 1em;
+}
+
+p {
+    margin: 0.4em 0 0.5em 0;
+    line-height: 1.6;
+}
+
+/* Table of Contents */
+.toc {
+    display: inline-block;
+    display: table;
+    zoom: 1;
+    border: 1px solid #444444;
+    background-color: #222222;
+    padding: 7px;
+    font-size: 95%;
+    margin-top: 1em;
+}
+
+.toctitle {
+    direction: ltr;
+    text-align: center;
+}
+
+.toctitle h2 {
+    display: inline;
+    border: none;
+    padding: 0;
+    font-size: 100%;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+
+.toc ul {
+    list-style-type: none;
+    list-style-image: none;
+    margin-left: 0;
+    padding: 0;
+    text-align: left;
+}
+
+.toc ul li {
+    margin-bottom: 0;
+}
+
+.tocnumber {
+    color: #dddddd;
+}
+
+.toctext {
+    color: #8ab4f8;
+}
+
+/* Forms and Inputs */
+textarea, .file-input, input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #444444;
+    background-color: #222222;
+    color: #ffffff;
+    padding: 0.5em;
+    font-family: sans-serif;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+}
+
+textarea:focus, input[type="text"]:focus {
+    border-color: #8ab4f8;
+    outline: 0;
+    box-shadow: inset 0 0 0 1px #8ab4f8;
+}
+
+/* Buttons */
+.editButtons {
+    margin-top: 1em;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.mw-ui-button {
+    background-color: #333333;
+    border: 1px solid #555555;
+    border-radius: 2px;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1em;
+    font-weight: bold;
+    line-height: 1.28571429em;
+    padding: 5px 12px;
+    text-align: center;
+    transition: background-color 100ms, color 100ms, border-color 100ms, box-shadow 100ms;
+}
+
+.mw-ui-button:hover {
+    background-color: #444444;
+}
+
+.mw-ui-progressive {
+    background-color: #3366cc;
+    border-color: #3366cc;
+    color: #fff;
+}
+
+.mw-ui-progressive:hover {
+    background-color: #447ff5;
+    border-color: #447ff5;
+}
+
+/* Success Box */
+.successbox {
+    border: 1px solid #444444;
+    background-color: #222222;
+    padding: 12px 24px;
+    border-left: 4px solid #00af89;
+}
