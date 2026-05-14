@@ -21,3 +21,4 @@ description: Strategist
 2. Instruct the user to open `http://localhost:8080/strategist.html` in their browser.
 3. Wait for the user to submit their brief details via the UI.
 4. Once the inputs are provided, analyze the information to fill out the `results/benchmark_report.md` template with the required sections above. Maintain a professional, strategic tone.
+5. After generating the strategy, format and export it to a beautifully designed PDF document. Ensure the PDF includes in-depth explanations, and strategically utilizes graphs, graphics, and images to enhance the visual communication.
