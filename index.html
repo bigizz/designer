@@ -5,6 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campaign Engine</title>
     <link rel="stylesheet" href="xp.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        .skeleton-line {
+            height: 14px;
+            background: linear-gradient(90deg, #1a1a1a 25%, #222 50%, #1a1a1a 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+        .md-render h1 { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+        .md-render h2 { font-size: 15px; font-weight: 700; margin: 16px 0 6px; color: var(--text); border-bottom: 1px solid #1a1a1a; padding-bottom: 4px; }
+        .md-render h3 { font-size: 13px; font-weight: 600; margin: 12px 0 4px; color: var(--text); }
+        .md-render p { margin: 6px 0; line-height: 1.6; color: var(--text-muted); }
+        .md-render ul { margin: 6px 0; padding-left: 20px; }
+        .md-render li { margin: 3px 0; color: var(--text-muted); }
+        .md-render code { background: #0a0a0a; padding: 1px 5px; border-radius: 3px; font-size: 12px; color: var(--text); }
+        .md-render pre { background: #0a0a0a; padding: 10px; border-radius: 4px; overflow-x: auto; margin: 8px 0; }
+        .md-render pre code { background: none; padding: 0; }
+        .md-render strong { color: var(--text); }
+        .md-render blockquote { border-left: 3px solid #333; padding-left: 12px; margin: 8px 0; color: var(--text-muted); }
+        .md-render table { border-collapse: collapse; width: 100%; margin: 8px 0; font-size: 12px; }
+        .md-render th, .md-render td { border: 1px solid #1a1a1a; padding: 6px 10px; text-align: left; }
+        .md-render th { background: #0e0e0e; color: var(--text); font-weight: 600; }
+        .assets-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+        .asset-card { background: #0e0e0e; border: 1px solid #1a1a1a; border-radius: 4px; overflow: hidden; }
+        .asset-card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+        .asset-card .asset-name { padding: 6px 8px; font-size: 11px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .no-assets { color: var(--text-muted); font-size: 12px; padding: 20px; text-align: center; border: 1px dashed #1a1a1a; }
+        .pipeline-container { transition: opacity 0.3s ease; }
+    </style>
 </head>
 <body>
 
@@ -89,15 +121,42 @@
                     <button class="xp-tab active" data-target="tab-report">Report</button>
                     <button class="xp-tab" data-target="tab-visuals">Visuals</button>
                     <button class="xp-tab" data-target="tab-media">Media Kit</button>
+                    <button class="xp-tab" data-target="tab-assets">Assets</button>
                 </div>
                 <div class="xp-tab-pane active" id="tab-report">
-                    <div class="xp-successbox">Benchmark report generated → <code>results/benchmark_report.md</code></div>
+                    <div id="report-content" class="md-render">
+                        <div class="xp-infobox">Run the pipeline to generate the benchmark report.</div>
+                    </div>
+                    <div id="report-skeleton" class="skeleton" style="display:none;">
+                        <div class="skeleton-line" style="width:60%"></div>
+                        <div class="skeleton-line" style="width:90%"></div>
+                        <div class="skeleton-line" style="width:40%"></div>
+                    </div>
                 </div>
                 <div class="xp-tab-pane" id="tab-visuals">
-                    <div class="xp-successbox">Visual direction established → <code>results/visual_direction.md</code></div>
+                    <div id="visuals-content" class="md-render">
+                        <div class="xp-infobox">Run the pipeline to generate visual direction.</div>
+                    </div>
+                    <div id="visuals-skeleton" class="skeleton" style="display:none;">
+                        <div class="skeleton-line" style="width:40%"></div>
+                        <div class="skeleton-line" style="width:70%"></div>
+                        <div class="skeleton-line" style="width:55%"></div>
+                    </div>
                 </div>
                 <div class="xp-tab-pane" id="tab-media">
-                    <div class="xp-successbox">Media kit compiled → <code>results/media_kit.md</code></div>
+                    <div id="media-content" class="md-render">
+                        <div class="xp-infobox">Run the pipeline to generate the media kit.</div>
+                    </div>
+                    <div id="media-skeleton" class="skeleton" style="display:none;">
+                        <div class="skeleton-line" style="width:50%"></div>
+                        <div class="skeleton-line" style="width:80%"></div>
+                        <div class="skeleton-line" style="width:35%"></div>
+                    </div>
+                </div>
+                <div class="xp-tab-pane" id="tab-assets">
+                    <div id="assets-grid" class="assets-grid">
+                        <div class="xp-infobox">Run the pipeline to generate assets.</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -124,46 +183,8 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById(btn.dataset.target).classList.add('active');
         });
     });
-
-    const startBtn = document.getElementById('start-btn');
-    const input = document.getElementById('campaign-input');
-
-    startBtn.addEventListener('click', async () => {
-        if(!input.value.trim()) return alert('Please enter a brief or URL.');
-        startBtn.disabled = true;
-        startBtn.textContent = '⏳ Running...';
-
-        const delay = ms => new Promise(r => setTimeout(r, ms));
-        const setPhase = (id, state, text) => {
-            document.getElementById(id).className = 'pipeline-phase ' + state;
-            document.getElementById('status-' + id.split('-')[1]).textContent = text;
-        };
-
-        ['phase-1','phase-2','phase-3'].forEach(id => setPhase(id, '', 'Pending'));
-        document.getElementById('results-panel').style.display = 'none';
-
-        setPhase('phase-1', 'active', 'Analyzing...');
-        await delay(2000);
-        setPhase('phase-1', 'completed', '✓ Done');
-        document.getElementById('arrow-1').classList.add('lit');
-        await delay(600);
-
-        setPhase('phase-2', 'active', 'Designing...');
-        await delay(2000);
-        setPhase('phase-2', 'completed', '✓ Done');
-        document.getElementById('arrow-2').classList.add('lit');
-        await delay(600);
-
-        setPhase('phase-3', 'active', 'Generating...');
-        await delay(2500);
-        setPhase('phase-3', 'completed', '✓ Done');
-        await delay(400);
-
-        document.getElementById('results-panel').style.display = 'block';
-        startBtn.disabled = false;
-        startBtn.textContent = '▶ Run';
-    });
 });
 </script>
+<script src="app.js"></script>
 </body>
 </html>

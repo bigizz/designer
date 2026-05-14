@@ -1,168 +1,152 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const startBtn = document.getElementById('start-btn');
-    const urlInput = document.getElementById('campaign-input');
-    const pipeline = document.querySelector('.pipeline');
-    const resultsPanel = document.getElementById('results-panel');
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabPanes = document.querySelectorAll('.tab-pane');
+  const startBtn = document.getElementById('start-btn');
+  const input = document.getElementById('campaign-input');
+  const resultsPanel = document.getElementById('results-panel');
 
-    // UI State
-    let isRunning = false;
+  const delay = ms => new Promise(r => setTimeout(r, ms));
 
-    // Tabs logic
-    tabBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // Remove active class from all
-            tabBtns.forEach(b => b.classList.remove('active'));
-            tabPanes.forEach(p => p.classList.remove('active'));
+  const setPhase = (id, state, text) => {
+    const el = document.getElementById(id);
+    if (el) el.className = 'pipeline-phase ' + state;
+    const statusEl = document.getElementById('status-' + id.split('-')[1]);
+    if (statusEl) statusEl.textContent = text;
+  };
 
-            // Add active class to clicked tab and corresponding pane
-            btn.classList.add('active');
-            const targetId = btn.getAttribute('data-target');
-            document.getElementById(targetId).classList.add('active');
-        });
+  const resetPipeline = () => {
+    ['phase-1', 'phase-2', 'phase-3'].forEach(id => setPhase(id, '', 'Pending'));
+    ['arrow-1', 'arrow-2'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.classList.remove('lit');
     });
+    if (resultsPanel) resultsPanel.style.display = 'none';
+  };
 
-    // Workflow logic
+  const runPipelineAnimation = async () => {
+    resetPipeline();
+    setPhase('phase-1', 'active', 'Analyzing...');
+    await delay(2000);
+    setPhase('phase-1', 'completed', 'Done');
+    const a1 = document.getElementById('arrow-1');
+    if (a1) a1.classList.add('lit');
+    await delay(600);
+
+    setPhase('phase-2', 'active', 'Designing...');
+    await delay(2000);
+    setPhase('phase-2', 'completed', 'Done');
+    const a2 = document.getElementById('arrow-2');
+    if (a2) a2.classList.add('lit');
+    await delay(600);
+
+    setPhase('phase-3', 'active', 'Generating...');
+    await delay(2500);
+    setPhase('phase-3', 'completed', 'Done');
+    await delay(400);
+
+    if (resultsPanel) resultsPanel.style.display = 'block';
+  };
+
+  // Show skeletons while loading
+  const showSkeletons = () => {
+    ['report', 'visuals', 'media'].forEach(id => {
+      const content = document.getElementById(id + '-content');
+      const skeleton = document.getElementById(id + '-skeleton');
+      if (content) content.innerHTML = '';
+      if (skeleton) skeleton.style.display = 'block';
+    });
+  };
+
+  const hideSkeletons = () => {
+    ['report', 'visuals', 'media'].forEach(id => {
+      const skeleton = document.getElementById(id + '-skeleton');
+      if (skeleton) skeleton.style.display = 'none';
+    });
+  };
+
+  // Fetch and render markdown into a container
+  const loadMarkdown = async (url, containerId) => {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('Not found');
+      const md = await res.text();
+      if (typeof marked !== 'undefined') {
+        container.innerHTML = marked.parse(md);
+      } else {
+        container.innerHTML = '<pre>' + md.replace(/</g, '&lt;') + '</pre>';
+      }
+    } catch {
+      container.innerHTML =
+        '<div class="xp-infobox">' + url + ' not yet generated. Run the pipeline first.</div>';
+    }
+  };
+
+  // Load assets from manifest.json
+  const loadAssets = async () => {
+    const grid = document.getElementById('assets-grid');
+    if (!grid) return;
+    try {
+      const res = await fetch('assets/manifest.json');
+      if (!res.ok) throw new Error('No manifest');
+      const files = await res.json();
+      if (!Array.isArray(files) || files.length === 0) {
+        grid.innerHTML = '<div class="no-assets">No assets generated yet.</div>';
+        return;
+      }
+      grid.innerHTML = files.map(f =>
+        '<div class="asset-card">' +
+          '<img src="assets/' + encodeURIComponent(f) +
+            '" alt="' + f + '" loading="lazy" onerror="this.parentElement.innerHTML=\'<div style=aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;background:#0e0e0e;color:#555;font-size:11px>Failed to load</div>\'">' +
+          '<div class="asset-name">' + f + '</div>' +
+        '</div>'
+      ).join('');
+    } catch {
+      grid.innerHTML = '<div class="no-assets">No manifest found. Run the Designer phase to generate assets.</div>';
+    }
+  };
+
+  // Load everything after pipeline
+  const loadResults = async () => {
+    showSkeletons();
+    await Promise.all([
+      loadMarkdown('results/benchmark_report.md', 'report-content'),
+      loadMarkdown('results/visual_direction.md', 'visuals-content'),
+      loadMarkdown('results/media_kit.md', 'media-content'),
+    ]);
+    hideSkeletons();
+    loadAssets();
+  };
+
+  const refreshResults = async () => {
+    const pipeline = document.querySelector('.pipeline-container');
+    if (pipeline) pipeline.style.opacity = '0.5';
+    await runPipelineAnimation();
+    if (pipeline) pipeline.style.opacity = '1';
+    await loadResults();
+  };
+
+  // --- Event handlers ---
+
+  if (startBtn) {
     startBtn.addEventListener('click', async () => {
-        if (isRunning) return;
-        
-        const inputValue = urlInput.value.trim();
-        if (!inputValue) {
-            alert('Please provide a URL or brief input to start.');
-            return;
-        }
-
-        isRunning = true;
-        startBtn.classList.add('loading');
-        resultsPanel.classList.add('hidden');
-        
-        // Reset phases
-        document.querySelectorAll('.phase-card').forEach(card => {
-            card.classList.remove('active', 'completed');
-            card.querySelector('.status-text').textContent = 'Pending';
-        });
-        pipeline.className = 'pipeline';
-
-        try {
-            await runEngineWorkflow();
-        } catch (error) {
-            console.error(error);
-            alert('An error occurred during workflow execution.');
-        } finally {
-            isRunning = false;
-            startBtn.classList.remove('loading');
-            startBtn.querySelector('.btn-text').textContent = 'Run Engine Again';
-        }
+      if (!input.value.trim()) {
+        return alert('Please enter a brief or URL to start.');
+      }
+      startBtn.disabled = true;
+      startBtn.textContent = 'Running...';
+      try {
+        await refreshResults();
+      } catch (err) {
+        console.error(err);
+      } finally {
+        startBtn.disabled = false;
+        startBtn.textContent = 'Run';
+      }
     });
+  }
 
-    async function runEngineWorkflow() {
-        // --- PHASE 1: Strategist ---
-        await updatePhaseState('phase-1', 'active', 'Analyzing Brief...');
-        await delay(2500);
-        await updatePhaseState('phase-1', 'completed', 'Completed');
-        
-        pipeline.classList.add('active-1-to-2');
-        await delay(1000);
-
-        // --- PHASE 2: Creative Director ---
-        await updatePhaseState('phase-2', 'active', 'Developing Visuals...');
-        await delay(3000);
-        await updatePhaseState('phase-2', 'completed', 'Completed');
-
-        pipeline.classList.add('active-2-to-3');
-        await delay(1000);
-
-        // --- PHASE 3: Designer ---
-        await updatePhaseState('phase-3', 'active', 'Generating Assets...');
-        await delay(3500);
-        await updatePhaseState('phase-3', 'completed', 'Completed');
-
-        await delay(500);
-        showResults();
-    }
-
-    async function updatePhaseState(phaseId, state, text) {
-        const card = document.getElementById(phaseId);
-        if (state === 'active') {
-            card.classList.add('active');
-            card.classList.remove('completed');
-        } else if (state === 'completed') {
-            card.classList.remove('active');
-            card.classList.add('completed');
-        }
-        card.querySelector('.status-text').textContent = text;
-    }
-
-    function delay(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
-
-    function showResults() {
-        resultsPanel.classList.remove('hidden');
-        
-        // Populate actual content
-        populateReport();
-        populateVisuals();
-        populateMedia();
-
-        // Simulate fetching/rendering delay
-        setTimeout(() => {
-            // Hide skeletons, show actual
-            ['report', 'visuals', 'media'].forEach(id => {
-                document.getElementById(`${id}-skeleton`).classList.add('hidden');
-                document.getElementById(`${id}-actual`).classList.remove('hidden');
-            });
-        }, 1000);
-    }
-
-    function populateReport() {
-        const reportActual = document.getElementById('report-actual');
-        reportActual.innerHTML = `
-            <h2>Benchmark Report: "Grow with Joy"</h2>
-            <h3>Audit</h3>
-            <p>Current positioning focuses heavily on functional benefits. However, benchmark analysis reveals an industry shift towards emotional connection and modern parenthood.</p>
-            <h3>Positioning</h3>
-            <p><strong>Strategic Pillar:</strong> Empowering Joyful Growth.</p>
-            <p><strong>Brand Essence:</strong> Nurturing, vibrant, and deeply connected to modern family moments.</p>
-            <h3>Persona</h3>
-            <p><strong>The Millennial Parent:</strong> Values aesthetics, authenticity, and emotional well-being over purely functional utility. Seeks products that integrate seamlessly into a dynamic, modern lifestyle.</p>
-        `;
-    }
-
-    function populateVisuals() {
-        const visualsActual = document.getElementById('visuals-actual');
-        visualsActual.innerHTML = `
-            <h2>Visual Direction Guidelines</h2>
-            <h3>Color Palette</h3>
-            <p>
-                <span class="color-swatch" style="background-color: #FFB020"></span> #FFB020 (Joyful Yellow) - Primary<br>
-                <span class="color-swatch" style="background-color: #00A651"></span> #00A651 (Nurture Green) - Secondary<br>
-                <span class="color-swatch" style="background-color: #E3000F"></span> #E3000F (Energetic Red) - Accent<br>
-                <span class="color-swatch" style="background-color: #F8F9FA"></span> #F8F9FA (Clean White) - Background
-            </p>
-            <h3>Typography System</h3>
-            <ul>
-                <li><strong>Headings:</strong> 'Outfit' - Bold, modern, welcoming.</li>
-                <li><strong>Body text:</strong> 'Inter' - Highly legible, clean, minimal.</li>
-            </ul>
-            <h3>Imagery Style</h3>
-            <p>Bright, candid photography capturing authentic interactions. Soft natural lighting. High contrast but warm tones to emphasize 'joy'.</p>
-        `;
-    }
-
-    function populateMedia() {
-        const mediaActual = document.getElementById('media-actual');
-        mediaActual.innerHTML = `
-            <h2>Generated Media Kit</h2>
-            <p>Assets synthesized based on the "Grow with Joy" visual direction.</p>
-            <div class="media-grid">
-                <div class="media-item" style="background: linear-gradient(135deg, #FFB020 0%, rgba(255,176,32,0) 100%), url('assets/joyful_family.png') center/cover;"></div>
-                <div class="media-item" style="background: linear-gradient(135deg, #00A651 0%, rgba(0,166,81,0) 100%), url('assets/child_laughing.png') center/cover;"></div>
-                <div class="media-item" style="background: linear-gradient(135deg, #E3000F 0%, rgba(227,0,15,0) 100%), url('assets/modern_parent.png') center/cover;"></div>
-                <div class="media-item">Video Asset (Placeholder)</div>
-            </div>
-            <p style="margin-top: 1rem;"><a href="#" style="color: var(--primary);">Download Full Kit (ZIP)</a></p>
-        `;
-    }
+  // --- Init: try to load existing results on page load ---
+  setTimeout(async () => {
+    await loadResults();
+  }, 300);
 });
