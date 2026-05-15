@@ -1,23 +1,9 @@
-[
-  {
-    "filename": "merendina_urban.svg",
-    "theme": "Urban Pulse",
-    "description": "Dynamic street-style mockup for Merendina featuring bold red and deep contrasts.",
-    "aspect_ratio": "1:1",
-    "purpose": "Instagram square post."
-  },
-  {
-    "filename": "golden_nostalgia.svg",
-    "theme": "Nostalgia & Heritage",
-    "description": "Vintage-inspired Golden biscuit flat lay with a traditional Moroccan mint tea glass.",
-    "aspect_ratio": "1:1",
-    "purpose": "Facebook & Instagram Carousel."
-  },
-  {
-    "filename": "tonik_crunch.svg",
-    "theme": "Sensory Texture",
-    "description": "High-impact vertical motion graphic of a Tonik wafer snapping to emphasize the crunch.",
-    "aspect_ratio": "9:16",
-    "purpose": "Instagram Reel / TikTok cover."
-  }
-]
+{
+  "assets": [
+    {
+      "filename": "cookie_lifestyle.png",
+      "alt_text": "A photorealistic lifestyle mockup shot of a banana coconut caramel cookie on a wooden table.",
+      "purpose": "Primary key visual demonstrating product context and authentic real-life photography."
+    }
+  ]
+}

@@ -1,64 +1,92 @@
-<style>
-  body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333; line-height: 1.6; }
-  h1 { color: #E30613; font-size: 4em; margin-bottom: 0; text-align: center; font-weight: 900; letter-spacing: 5px; }
-  h2 { color: #0056A4; border-bottom: 2px solid #FFD700; padding-bottom: 5px; margin-top: 30px; }
-  h3 { color: #E30613; }
-  .subtitle { text-align: center; font-size: 1.5em; color: #FFD700; background: #E30613; padding: 10px; border-radius: 5px; margin-bottom: 30px; font-weight: bold; letter-spacing: 2px;}
-  .card { background: #fdfdfd; padding: 20px; border-left: 8px solid #E30613; margin: 20px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-  table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.9em; }
-  th { background: #0056A4; color: white; padding: 15px; text-align: left; }
-  td { padding: 15px; border-bottom: 1px solid #ddd; }
-  .swatch { display: inline-block; width: 130px; height: 60px; margin-right: 15px; border-radius: 8px; text-align: center; line-height: 60px; color: white; font-weight: bold; font-size: 0.85em; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-  .footer { text-align: center; font-size: 0.8em; color: #999; border-top: 1px solid #eee; padding-top: 10px; margin-top: 50px; }
-  .highlight { color: #E30613; font-weight: bold; }
-</style>
-
-<h1>BIMO</h1>
-<div class="subtitle">THE TASTE OF GENERATIONS</div>
-
-## Strategic Vision
-
-<div class="card">
-<strong>Positioning:</strong> Bridging the gap between nostalgic Moroccan heritage ("L'benna d'Zman") and the dynamic pulse of modern urban youth. Bimo is not just a biscuit; it is the taste of memories and the energy of today.
-</div>
-
-### Visual Pillars
-
-| Pillar | Brand Focus | Aesthetic Concept |
-| :--- | :--- | :--- |
-| **The Golden Era** | Golden, Tagere | Analog film, warm tones, traditional Moroccan settings (zellige, tea trays). |
-| **Urban Pulse** | Merendina, Tonik | High-contrast flash, street photography, candid motion. |
-| **Sensory Textures** | All Brands | Extreme macro shots, crumbling wafers, melting chocolate. |
-
-### Color Archetypes
-
-<div class="swatch" style="background: #E30613;">#E30613 (Red)</div>
-<div class="swatch" style="background: #FFD700; color: #333;">#FFD700 (Gold)</div>
-<div class="swatch" style="background: #0056A4;">#0056A4 (Blue)</div>
-<div class="swatch" style="background: #8B4513;">#8B4513 (Brown)</div>
+# Groupe Bimo - Campaign Strategy
+**Brand:** Groupe Bimo
+**Date:** 2026-05-15
+**Campaign Version:** 1.0
 
 ---
 
-## Inspiration & Web Research
+# Phase 1: Benchmark Report
 
-Curated inspiration for the creative production phase, emphasizing the Moroccan retro-modern aesthetic.
+## Brand Audit: Groupe Bimo
+Groupe Bimo is a prominent player in the FMCG sector, specializing in Biscuiterie, Chocolaterie, Gaufretterie, and the transformation of cocoa beans. With new product lines including irresistible Cookies (Banane, Coco, Caramel), the brand is looking to launch a new campaign. The client's brief specifically emphasizes the need for authentic, real-life visualization of products through photography and mockups.
 
-*   **Official Web Presence:** [Groupe Bimo Corporate Information](https://groupebimo.com/)
-*   **Moodboard Keywords:** Use these on Behance & Pinterest for the photoshoot mood:
-    *   Modern Moroccan Lifestyle Photography
-    *   Retro Arab Brand Identity
-    *   Vibrant Food Photography Flash
+## Positioning
+**Essence:** Indulgent, accessible, and high-quality sweet treats for everyday enjoyment.
 
-## Media Kit Deliverables
+**Brand Pillars:**
+1. **Authenticity:** Real ingredients (cacao transformation) and relatable consumption moments.
+2. **Innovation:** Exciting flavor combinations like Banana-Coco-Caramel.
+3. **Joy & Sharing:** Enhancing family and social moments with delicious snacks.
 
-Mockups generated in SVG format to visualize the campaign aesthetic:
+## Gaps & Opportunities
+- **Gap:** Traditional FMCG marketing often relies on heavily stylized, artificial-looking renders or flat packaging shots. 
+- **Opportunity:** The client specifically requested real-life photography and mockups. This presents an opportunity to stand out with "slice-of-life" authentic imagery that highlights texture, context, and the visceral appeal of the products.
+- **Opportunity:** Highlighting the "bean-to-bar" (cocoa bean transformation) aspect visually can elevate the brand's perceived quality.
 
-| Asset File | Theme | Format |
-| :--- | :--- | :--- |
-| **merendina_urban.svg** | Urban Pulse | 1:1 Square |
-| **golden_nostalgia.svg** | Nostalgia & Heritage | 1:1 Square |
-| **tonik_crunch.svg** | Sensory Texture | 9:16 Vertical |
+## Persona
+**The Everyday Indulger (Amina & Youssef)**
+- **Demographics:** 18-45 years old, active professionals, students, or parents.
+- **Psychographics:** Values quality and taste but needs convenience. Looks for small moments of joy during a busy day (a coffee break, a kids' snack time). 
+- **Needs:** Craves authentic, relatable visual cues that promise a delicious taste experience.
 
-> **Note:** All assets are located in `results/assets/`
+---
 
-<div class="footer">GROUPE BIMO MAROC | CONFIDENTIAL STRATEGY | 2026</div>
+# Phase 2: Visual Direction
+
+## Moodboards: Conceptual Themes
+**Theme: "Authentic Indulgence"**
+Focus on real-world scenarios. Sunlight streaming across a rustic wooden kitchen table, a hand breaking a cookie in half, crumbs catching the light. The mood is warm, inviting, and visceral. The integration of product mockups within these scenes is key.
+
+## Hex & Typography
+**Color Palette:**
+- **Cocoa Brown:** `#3D2314` (Deep, rich, grounds the visual identity)
+- **Caramel Gold:** `#D49A36` (Warm, appetizing, acts as an accent)
+- **Creamy Off-White:** `#F9F6F0` (Clean, provides breathing room for vibrant products)
+- **Banana Yellow:** `#F4D03F` (Playful, energetic highlight)
+
+**Typography:**
+- **Primary (Headlines):** **Outfit** (Bold) - A modern, friendly sans-serif for impactful and clean communication.
+- **Secondary (Body):** **Inter** (Regular) - For maximum legibility and clean structure across print and digital.
+
+## Style Guidelines
+- **Imagery Style:** Photorealistic, "slice-of-life". Use natural lighting (golden hour or bright morning window light). Macro shots emphasizing textures (chocolate chips, waffle crunch).
+- **Layout:** Clean and minimal to let the photography shine. Large hero images with bold, overlapping typography. Use subtle drop shadows for depth and integrate real-world mockups.
+- **Tone:** Joyful, appetizing, authentic, and inviting.
+
+---
+
+# Phase 3: Media Kit
+
+## Generated Assets
+The following assets have been generated to align with the visual direction:
+
+### 1. Lifestyle Cookie Mockup
+A photorealistic representation of the product in a real-world setting, reinforcing the "Authentic Indulgence" theme.
+
+![Cookie Lifestyle Mockup](./assets/cookie_lifestyle.png)
+
+## Asset Delivery
+All final assets, including source files and exports, are available in the `results/assets/` directory.
+
+<style>
+  body {
+    font-family: 'Inter', sans-serif;
+    color: #3D2314;
+    background-color: #F9F6F0;
+    line-height: 1.6;
+    padding: 20px;
+  }
+  h1, h2, h3 {
+    font-family: 'Outfit', sans-serif;
+    color: #D49A36;
+  }
+  h1 {
+    border-bottom: 2px solid #F4D03F;
+    padding-bottom: 10px;
+  }
+  img {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+</style>
