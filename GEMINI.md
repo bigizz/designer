@@ -11,11 +11,12 @@ When the user invokes the `/strategy` command or asks to run the strategy/campai
     -   **Phase 1 (Strategist):** Generate `results/benchmark_report.md`.
     -   **Phase 2 (Creative Director):** Generate `results/visual_direction.md`.
     -   **Phase 3 (Designer):** Generate `results/media_kit.md` and any requested visual assets (images/Remotion videos) in `results/assets/`.
-3.  **Consolidation:** 
-    -   Merge the three markdown reports into `results/final_strategy.md`.
+3.  **Consolidation & Export:** 
+    -   Merge the strategic reports into a beautifully formatted Markdown document (`results/final_strategy.md`).
     -   Ensure all relative image paths and asset links are correct.
-    -   Add a clear header and table of contents to the final document.
-4.  **Completion:** Tell the user the process is finished and point them to `results/final_strategy.md`. Remind them they can use their `vscode-pdf` extension to export it to a final PDF.
+    -   Generate a premium PDF directly from the Markdown using `npx --yes md-to-pdf results/final_strategy.md`. 
+    -   **CRITICAL:** The resulting PDF MUST be a properly rendered document. Do NOT use complex raw HTML inside the Markdown if it causes the PDF to display raw HTML source code. Rely on standard Markdown formatting, tables, and CSS styles supported by `md-to-pdf` to ensure the final output is readable and visually pleasing.
+4.  **Completion:** Tell the user the process is finished and point them to `results/final_strategy.pdf`.
 
 ## Detailed Implementation Plan
 
