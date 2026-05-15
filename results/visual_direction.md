@@ -1,21 +1,46 @@
-# Phase 2: Visual Direction
+# Phase 2: Visual Direction — Groupe Bimo
 
 ## Moodboards: Conceptual Themes
-**Theme: "Authentic Indulgence"**
-Focus on real-world scenarios. Sunlight streaming across a rustic wooden kitchen table, a hand breaking a cookie in half, crumbs catching the light. The mood is warm, inviting, and visceral. The integration of product mockups within these scenes is key.
 
-## Hex & Typography
-**Color Palette:**
-- **Cocoa Brown:** `#3D2314` (Deep, rich, grounds the visual identity)
-- **Caramel Gold:** `#D49A36` (Warm, appetizing, acts as an accent)
-- **Creamy Off-White:** `#F9F6F0` (Clean, provides breathing room for vibrant products)
-- **Banana Yellow:** `#F4D03F` (Playful, energetic highlight)
+### Theme 1: "Authentic Indulgence" (Primary)
+Real-world scenarios: sunlight streaming across a rustic wooden kitchen table, a hand breaking a banana-coco-caramel cookie in half, crumbs catching the light, steam rising from a coffee cup beside the package. The mood is warm, inviting, visceral.
 
-**Typography:**
-- **Primary (Headlines):** **Outfit** (Bold) - A modern, friendly sans-serif for impactful and clean communication.
-- **Secondary (Body):** **Inter** (Regular) - For maximum legibility and clean structure across print and digital.
+### Theme 2: "Urban Snack Moment" (Billboard Focus)
+Bold, high-energy outdoor scenes — a cookie held against a sunlit city skyline, a vibrant street-side café table, oversized product shot with typography overlaying the urban backdrop. Designed for OOH billboard readability from distance.
+
+## Color Palette
+
+| Swatch | Hex | Role |
+|--------|-----|------|
+| Cocoa Brown | `#3D2314` | Deep foundation — grounds the identity |
+| Caramel Gold | `#D49A36` | Warm accent — appetizing, premium feel |
+| Creamy Off-White | `#F9F6F0` | Background — clean, airy, lets products breathe |
+| Banana Yellow | `#F4D03F` | Energetic highlight — playful, youthful |
+| Fresh Mint | `#A3D9A5` | Secondary accent — freshness, natural ingredients |
+
+## Typography
+
+| Usage | Font | Weight |
+|-------|------|--------|
+| Headlines / Billboard Copy | **Outfit** | Bold (700) |
+| Subheadings | **Outfit** | SemiBold (600) |
+| Body Copy | **Inter** | Regular (400) |
+| Accent / Data | **Inter** | Medium (500) |
 
 ## Style Guidelines
-- **Imagery Style:** Photorealistic, "slice-of-life". Use natural lighting (golden hour or bright morning window light). Macro shots emphasizing textures (chocolate chips, waffle crunch).
-- **Layout:** Clean and minimal to let the photography shine. Large hero images with bold, overlapping typography. Use subtle drop shadows for depth and integrate real-world mockups (e.g., packaging sitting on a table next to a coffee cup).
-- **Tone:** Joyful, appetizing, authentic, and inviting.
+
+### Imagery
+- **Style:** Photorealistic, "slice-of-life"
+- **Lighting:** Natural — golden hour or bright morning window light
+- **Composition:** Macro shots emphasizing textures (chocolate chips, caramel drizzle, coconut flakes)
+- **Billboard variant:** High-contrast, bold product hero with minimal background blur, large readable typography
+
+### Layout
+- Clean, minimal — let the photography lead
+- Billboard: centered product + headline, brand logo bottom-right
+- Digital: large hero images with bold overlapping typography
+- Drop shadows for depth on packaging mockups
+
+### Tone
+- Joyful, appetizing, authentic, inviting
+- Warm but not sentimental — confident and modern

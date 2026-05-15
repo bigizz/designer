@@ -1,9 +1,34 @@
 {
   "assets": [
     {
-      "filename": "cookie_lifestyle.png",
-      "alt_text": "A photorealistic lifestyle mockup shot of a banana coconut caramel cookie on a wooden table.",
-      "purpose": "Primary key visual demonstrating product context and authentic real-life photography."
+      "filename": "cookie_product_hero.svg",
+      "alt_text": "Hero product shot of a Banana-Coco-Caramel cookie with chocolate chips, coconut flakes, and caramel drizzle on a warm background.",
+      "purpose": "Primary key visual for digital and print use."
+    },
+    {
+      "filename": "billboard_mockup.svg",
+      "alt_text": "Billboard mockup featuring the new cookie product against a city skyline with 'Nouveau Cookies Banane-Coco-Caramel' headline.",
+      "purpose": "OOH billboard visualization for client presentation."
+    },
+    {
+      "filename": "lifestyle_tableau.svg",
+      "alt_text": "Lifestyle still life showing a BIMO cookie on a wooden table beside a coffee cup, banana, and cookie packaging with warm sunlight.",
+      "purpose": "Authentic 'slice-of-life' imagery reinforcing the indulgence theme."
+    },
+    {
+      "filename": "golden_nostalgia.svg",
+      "alt_text": "Golden nostalgia themed brand graphic.",
+      "purpose": "Additional visual identity asset."
+    },
+    {
+      "filename": "merendina_urban.svg",
+      "alt_text": "Urban snack moment brand graphic.",
+      "purpose": "Additional visual identity asset for urban campaigns."
+    },
+    {
+      "filename": "tonik_crunch.svg",
+      "alt_text": "Crunch texture brand graphic.",
+      "purpose": "Texture-focused brand asset."
     }
   ]
 }
